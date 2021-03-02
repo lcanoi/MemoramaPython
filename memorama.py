@@ -7,6 +7,7 @@ def instrucciones():
     '''Imprime las instrucciones'''
     print("Instrucciones:")
     print("Este juego es para dos jugadores. Tomarán turnos con objetivo de voltear los pares de cartas que sean iguales. Gana quien consiga más pares.")
+    print("Si un jugador consigue un par, volverá a ser su turno.")
     print("Selecciona la carta que desees voltear escribiendo el numero de su fila y después el numero de su columna.")
     print("Si quieres empezar un juego nuevo escribe \"NUEVO\". Si en algún punto quieres terminar el juego escribe \"SALIR\".")
 
@@ -115,7 +116,7 @@ def resultados(s1,s2):
 def main():
     '''Corre el(los) Juego(s) utilizando todas las funciones previas'''
     print("Bienvenido al memorama!")
-    print("Para leer las instrucciones escribe \"INFO\". Si quieres empezar un juego nuevo escribe \"NUEVO\".", end="")
+    print("Para leer las instrucciones escribe \"INFO\". Si quieres empezar un juego nuevo escribe \"NUEVO\". ", end="")
     print("Si quieres salir del juego escribe \"SALIR\".")
     varx = accion("")
     juego = 0
@@ -137,7 +138,8 @@ def main():
                     ["5 ","- ","- ","- ","- ","- ","- "]]
             pnt_matriz(matriz,"")
             cartas = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13,14,14,15,15,16,16,17,17,18,18]
-            rdm.shuffle(cartas)
+            #para realizar pruebas puede comentar la siguiente línea, de manera que los pares salgan ordenados
+            #rdm.shuffle(cartas)
             wait = getpass.getpass("- - Presiona ENTER para Continuar - -\n")
             #Se utiliza getpass para que si el jugador teclea algo no se muestre, y solo avance hasta presionar ENTER
             while fin != 1:
@@ -150,9 +152,11 @@ def main():
                 elif result == "N":
                     print("Fallaste...")
                     wait = getpass.getpass("\n- - Presiona ENTER para Continuar - -\n")
+                    #si deseas eliminar la regla "despues de conseguir un par le vuelve a tocar al jugador":
+                    #saca la siguiente línea del elif
+                    player += 1
                 if varx != "NUEVO" and varx != "SALIR":
                     pnt_matriz(matriz,"")
-                player += 1
                 if player > 2:
                     player = 1
                 if score1 + score2 >= 18:
